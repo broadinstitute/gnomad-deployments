@@ -1,0 +1,212 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- https://github.com/broadinstitute/gnomad-browser//deploy/manifests/elasticsearch/base?timeout=120&ref=298131e8d51d2d25a72252b3b955c808142e2743
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/nodeSets
+        value:
+          - name: master
+            count: 3
+            config:  # https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+              node.roles: ["master"]
+              cluster.routing.allocation.disk.watermark.low: '100gb'
+              cluster.routing.allocation.disk.watermark.high: '50gb'
+              cluster.routing.allocation.disk.watermark.flood_stage: '10gb'
+              ingest.geoip.downloader.enabled: false
+            podTemplate:
+              metadata:
+                labels:
+                  role: master
+              spec:
+                automountServiceAccountToken: true
+                serviceAccountName: es-snaps
+                affinity:
+                  nodeAffinity:
+                    requiredDuringSchedulingIgnoredDuringExecution:
+                      nodeSelectorTerms:
+                        - matchExpressions:
+                            - key: cloud.google.com/gke-nodepool
+                              operator: In
+                              values:
+                                - main-pool
+                initContainers:
+                  - name: sysctl
+                    securityContext:
+                      privileged: true
+                    command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+                  - name: install-plugins
+                    command: ['sh', '-c', 'bin/elasticsearch-plugin install --batch repository-gcs']
+            volumeClaimTemplates:
+              - metadata:
+                  name: elasticsearch-data
+                spec:
+                  accessModes:
+                    - ReadWriteOnce
+                  storageClassName: premium-rwo
+                  resources:
+                    requests:
+                      storage: 100Gi
+          - name: coordinating-nodes
+            count: 3
+            config:  # https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+              node.roles: []
+              cluster.routing.allocation.disk.watermark.low: '100gb'
+              cluster.routing.allocation.disk.watermark.high: '50gb'
+              cluster.routing.allocation.disk.watermark.flood_stage: '10gb'
+              ingest.geoip.downloader.enabled: false
+            volumeClaimTemplates:
+            - metadata:
+                name: elasticsearch-data
+              spec:
+                accessModes:
+                - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi
+                storageClassName: premium-rwo
+            podTemplate:
+              metadata:
+                labels:
+                  role: coordinating
+              spec:
+                automountServiceAccountToken: true
+                serviceAccountName: es-snaps
+                affinity:
+                  nodeAffinity:
+                    requiredDuringSchedulingIgnoredDuringExecution:
+                      nodeSelectorTerms:
+                        - matchExpressions:
+                            - key: cloud.google.com/gke-nodepool
+                              operator: In
+                              values:
+                                - main-pool
+                initContainers:
+                  - name: sysctl
+                    securityContext:
+                      privileged: true
+                    command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+                  - name: install-plugins
+                    command: ['sh', '-c', 'bin/elasticsearch-plugin install --batch repository-gcs']
+          - name: data-blue
+            count: 3
+            config:  # https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+              node.roles: ["data"]
+              cluster.routing.allocation.disk.watermark.low: '100gb'
+              cluster.routing.allocation.disk.watermark.high: '50gb'
+              cluster.routing.allocation.disk.watermark.flood_stage: '10gb'
+              ingest.geoip.downloader.enabled: false
+            podTemplate:
+              metadata:
+                labels:
+                  role: data
+              spec:
+                automountServiceAccountToken: true
+                serviceAccountName: es-snaps
+                affinity:
+                  nodeAffinity:
+                    requiredDuringSchedulingIgnoredDuringExecution:
+                      nodeSelectorTerms:
+                        - matchExpressions:
+                            - key: cloud.google.com/gke-nodepool
+                              operator: In
+                              values:
+                                - es-data
+                initContainers:
+                  - name: sysctl
+                    securityContext:
+                      privileged: true
+                    command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+                  - name: install-plugins
+                    command: ['sh', '-c', 'bin/elasticsearch-plugin install --batch repository-gcs']
+                containers:
+                  - name: elasticsearch
+                    env:
+                      - name: ES_JAVA_OPTS
+                        value: '-Xms26g -Xmx26g'
+                    resources:
+                      requests:
+                        cpu: 6
+                        memory: 52Gi
+                      limits:
+                        cpu: 7
+                        memory: 52Gi
+            volumeClaimTemplates:
+              - metadata:
+                  name: elasticsearch-data
+                spec:
+                  accessModes:
+                    - ReadWriteOnce
+                  storageClassName: standard
+                  resources:
+                    requests:
+                      storage: 1750Gi
+          # - name: ingest
+          #   count: 48
+          #   config:  # https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+          #     node.roles: ["data", "ingest"]
+          #     cluster.routing.allocation.disk.watermark.low: '100gb'
+          #     cluster.routing.allocation.disk.watermark.high: '50gb'
+          #     cluster.routing.allocation.disk.watermark.flood_stage: '10gb'
+          #     ingest.geoip.downloader.enabled: false
+          #   podTemplate:
+          #     metadata:
+          #       labels:
+          #         role: ingest
+          #     spec:
+          #       automountServiceAccountToken: true
+          #       serviceAccountName: es-snaps
+          #       affinity:
+          #         nodeAffinity:
+          #           requiredDuringSchedulingIgnoredDuringExecution:
+          #             nodeSelectorTerms:
+          #               - matchExpressions:
+          #                   - key: cloud.google.com/gke-nodepool
+          #                     operator: In
+          #                     values:
+          #                       - es-ingest
+          #       initContainers:
+          #         - name: sysctl
+          #           securityContext:
+          #             privileged: true
+          #           command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+          #         - name: install-plugins
+          #           command: ['sh', '-c', 'bin/elasticsearch-plugin install --batch repository-gcs']
+          #       containers:
+          #         - name: elasticsearch
+          #           env:
+          #             - name: ES_JAVA_OPTS
+          #               value: '-Xms12g -Xmx12g'
+          #           resources:
+          #             requests:
+          #               cpu: 3
+          #               memory: 24Gi
+          #             limits:
+          #               cpu: 3.5
+          #               memory: 24Gi
+          #   volumeClaimTemplates:
+          #     - metadata:
+          #         name: elasticsearch-data
+          #       spec:
+          #         accessModes:
+          #           - ReadWriteOnce
+          #         storageClassName: premium-rwo
+          #         resources:
+          #           requests:
+          #             storage: 2000Gi
+    target:
+      kind: Elasticsearch
+      name: gnomad
+# apiVersion: elasticsearch.k8s.elastic.co/v1
+# kind: Elasticsearch
+# metadata:
+#   name: gnomad
+# spec:
+#   version: 7.17.10
+#   http:
+#     tls:
+#       selfSignedCertificate:
+#         disabled: true
+#   nodeSets:
