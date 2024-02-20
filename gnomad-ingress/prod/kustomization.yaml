@@ -1,6 +1,5 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-labels:
 resources:
   - https://github.com/broadinstitute/gnomad-browser//deploy/manifests/ingress?timeout=120&ref=a74e10c606912738f14fe7ffca8ec05d9f9c732d

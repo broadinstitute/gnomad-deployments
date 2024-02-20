@@ -12,9 +12,9 @@ labels:
 nameSuffix: -blue
 images:
   - name: gcr.io/exac-gnomad/gnomad-api
-    newTag: '85dc023a'
+    newTag: '5fe6dfed'
   - name: gcr.io/exac-gnomad/gnomad-browser
-    newTag: '85dc023a'
+    newTag: '5fe6dfed'
 replacements:
   - source:
       fieldPath: metadata.name
