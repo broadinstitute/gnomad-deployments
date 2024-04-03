@@ -2,61 +2,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=030c679fe1716c1100207b6159623c4811cd52ba
+  - https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=61f4e81096213fa4665cf6229535506f4d88b105
   - frontendconfig.yaml
+  - ingress.yaml
+labels:
+- includeSelectors: true
+  includeTemplates: true
+  pairs:
+    environment: prod
 images:
   - name: gcr.io/exac-gnomad/exome-results-browsers
     newTag: '33aae1b'
-patches:
-  - patch: |-
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: exome-results-browsers-ingress
-        annotations:
-          kubernetes.io/ingress.global-static-ip-name: prod-exome-results-browsers-ip
-          ingress.gcp.kubernetes.io/pre-shared-cert: exome-results-browsers-cert
-          networking.gke.io/v1beta1.FrontendConfig: exome-results-browsers-frontend-config
-  - patch: |-
-      - op: replace
-        path: /spec/rules
-        value:
-          - host: asc.broadinstitute.org
-            http:
-              paths:
-                - backend:
-                    service:
-                      name: exome-results-browsers
-                      port:
-                        number: 80
-                  pathType: ImplementationSpecific
-          - host: bipex.broadinstitute.org
-            http:
-              paths:
-                - backend:
-                    service:
-                      name: exome-results-browsers
-                      port:
-                        number: 80
-                  pathType: ImplementationSpecific
-          - host: epi25.broadinstitute.org
-            http:
-              paths:
-                - backend:
-                    service:
-                      name: exome-results-browsers
-                      port:
-                        number: 80
-                  pathType: ImplementationSpecific
-          - host: schema.broadinstitute.org
-            http:
-              paths:
-                - backend:
-                    service:
-                      name: exome-results-browsers
-                      port:
-                        number: 80
-                  pathType: ImplementationSpecific
-    target:
-      kind: Ingress
-      name: exome-results-browsers-ingress
