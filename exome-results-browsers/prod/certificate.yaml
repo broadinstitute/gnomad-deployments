@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: exome-results-browsers-managed-cert
+spec:
+  domains:
+    - asc.broadinstitute.org
+    - bipex.broadinstitute.org
+    - epi25.broadinstitute.org
+    - schema.broadinstitute.org
