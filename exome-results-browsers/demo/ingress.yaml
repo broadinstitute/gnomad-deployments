@@ -5,17 +5,15 @@ metadata:
   name: exome-results-browsers-ingress
   annotations:
     kubernetes.io/ingress.demo-static-ip-name: demo-exome-results-browsers-ip
-    networking.gke.io/v1beta1.FrontendConfig: demo-exome-results-browsers-frontend-config
   labels:
-    service: demo-exome-results-browsers
-    environment: qa
+    service: exome-results-browsers
 spec:
   rules:
     - http:
         paths:
           - backend:
               service:
-                name: demo-exome-results-browsers
+                name: exome-results-browsers
                 port:
                   number: 80
             pathType: ImplementationSpecific

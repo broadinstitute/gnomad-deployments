@@ -1,17 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=61f4e81096213fa4665cf6229535506f4d88b105
-- ingress.yaml
+  - https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=61f4e81096213fa4665cf6229535506f4d88b105
+  - ingress.yaml
 namePrefix: demo-
 labels:
-- includeSelectors: true
-  includeTemplates: true
-  pairs:
-    environment: qa
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      environment: qa
 images:
-- name: gcr.io/exac-gnomad/exome-results-browsers
-  newTag: a017321-rg_add_demo_kubernetes_yaml
+  - name: gcr.io/exac-gnomad/exome-results-browsers
+    newTag: a017321-rg_add_demo_kubernetes_yaml
 patches:
   - patch: |-
       kind: Deployment
