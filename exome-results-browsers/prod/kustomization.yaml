@@ -1,16 +1,16 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=f9e0e2377f4cad31238bc3e8e59817fcd069eed6
-  - frontendconfig.yaml
-  - ingress.yaml
-  - certificate.yaml
+- https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=f9e0e2377f4cad31238bc3e8e59817fcd069eed6
+- frontendconfig.yaml
+- ingress.yaml
+- certificate.yaml
 labels:
-  - includeSelectors: true
-    includeTemplates: true
-    pairs:
-      environment: prod
+- includeSelectors: true
+  includeTemplates: true
+  pairs:
+    environment: prod
 images:
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: "f9e0e23"
+- name: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
+  newName: us-docker.pkg.dev/gnomadev/gnomad/exome-results-browsers
+  newTag: faa76b8
