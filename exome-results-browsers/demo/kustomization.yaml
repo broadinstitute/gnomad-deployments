@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - https://github.com/broadinstitute/exome-results-browsers//deployment/manifests/?timeout=120&ref=e597dd52cee6f3a393e4527b17dcdc99021f50bb
+  - ../base
   - ingress.yaml
 namePrefix: demo-
 labels:
