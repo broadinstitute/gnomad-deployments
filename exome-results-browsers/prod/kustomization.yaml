@@ -12,5 +12,4 @@ labels:
     environment: prod
 images:
 - name: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-  newName: us-docker.pkg.dev/gnomadev/gnomad/exome-results-browsers
   newTag: 19136ee
