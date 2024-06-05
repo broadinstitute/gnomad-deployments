@@ -5,7 +5,6 @@ metadata:
   name: exome-results-browsers-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: prod-exome-results-browsers-ip
-    # TODO: once new managed cert is provisioned, remove the pre-shared-cert annotation
     networking.gke.io/managed-certificates: exome-results-browsers-managed-cert
     networking.gke.io/v1beta1.FrontendConfig: exome-results-browsers-frontend-config
   labels:
