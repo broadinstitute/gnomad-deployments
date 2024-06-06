@@ -11,7 +11,8 @@ labels:
       environment: qa
       name: demo-exome-results-browsers
 images:
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
+  - name: exome-results-browsers
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
     newTag: a017321-rg_add_demo_kubernetes_yaml
 patches:
   - patch: |-
