@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- legacy-redirects.frontendconfig.yaml
+configMapGenerator:
+  - name: legacy-redirects-settings
+    behavior: merge
+    literals:
+      - ip=34.36.116.121
+patches:
+  - patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: legacy-redirects-ingress
+        annotations:
+          kubernetes.io/ingress.global-static-ip-name: prod-legacy-redirects-ip
+          ingress.gcp.kubernetes.io/pre-shared-cert: exac-cert
+          networking.gke.io/v1beta1.FrontendConfig: legacy-redirects-frontend-config
+  - patch: |-
+      - op: add
+        path: /spec/rules/0/host
+        value: exac.broadinstitute.org
+    target:
+      kind: Ingress
+      name: legacy-redirects-ingress
