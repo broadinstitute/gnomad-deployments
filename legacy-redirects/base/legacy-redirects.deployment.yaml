@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: gcr.io/exac-gnomad/legacy-redirects:latest
+        image: us-docker.pkg.dev/exac-gnomad/gnomad/legacy-redirects:latest
         env:
         - name: INGRESS_IP
           valueFrom:
