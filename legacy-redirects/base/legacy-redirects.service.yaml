@@ -1,0 +1,12 @@
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: legacy-redirects-nodeport
+  spec:
+    type: NodePort
+    selector:
+      name: legacy-redirects
+    ports:
+    - port: 80
+      targetPort: 80
