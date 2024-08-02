@@ -20,7 +20,6 @@ patches:
       name: legacy-redirects-ingress
       annotations:
         kubernetes.io/ingress.global-static-ip-name: prod-legacy-redirects-ip
-        ingress.gcp.kubernetes.io/pre-shared-cert: exac-cert
         networking.gke.io/managed-certificates: legacy-redirects-managed-cert
         networking.gke.io/v1beta1.FrontendConfig: legacy-redirects-frontend-config
 - patch: |-
