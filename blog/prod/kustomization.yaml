@@ -6,7 +6,7 @@ resources:
 images:
   - name: gnomad-blog
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-blog
-    newTag: '4b7b81c'
+    newTag: 'f9c397c'
   - name: gnomad-blog-auth
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-blog-auth
-    newTag: '4b7b81c'
+    newTag: 'f9c397c'
