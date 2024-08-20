@@ -37,7 +37,7 @@ The prod configuration patches the nodeSets to contain:
 - Optionally, a set of ingest nodes if you uncomment them.
 
 
-It also included a [PushSecret](https://external-secrets.io/latest/api/pushsecret/) definition to update the `gnomad-v4-elasticsearch-password` secret in the GCP Secret Manager with the current value of the `gnomad-es-elastic-user` that is created by the Elastic operator.
+It also includes a [PushSecret](https://external-secrets.io/latest/api/pushsecret/) definition to update the `gnomad-v4-elasticsearch-password` secret in the GCP Secret Manager with the current value of the `gnomad-es-elastic-user` secret that is created by the Elastic operator.
 
 Under normal circumstances, you should not apply this configuration directly. Make The desired changes to the config in a pull request, and then merge it after review. The deployment can then be triggered from ArgoCD.
 
