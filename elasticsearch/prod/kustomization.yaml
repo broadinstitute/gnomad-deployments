@@ -5,6 +5,14 @@ resources:
   - ../base
   - pushsecret.yaml
 patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: gnomad-elasticsearch-lb
+      spec:
+        selector:
+          elasticsearch.k8s.elastic.co/node-master: 'false'
   - target:
       group: elasticsearch.k8s.elastic.co
       version: v1

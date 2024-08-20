@@ -33,4 +33,4 @@ spec:
             storageClassName: premium-rwo
             resources:
               requests:
-                storage: 300Gi
+                storage: 100Gi
