@@ -1,15 +1,15 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+resources:
+  - ../base
 labels:
   - pairs:
       deployment: blue
     includeSelectors: true
     includeTemplates: true
 nameSuffix: -blue
-resources:
-  - https://github.com/broadinstitute/gnomad-browser//deploy/manifests/reads/base?timeout=120&ref=141ca3938078db0ef56e0803082f0b55ce907839
 images:
   - name: gnomad-reads-server
-    newName: gcr.io/exac-gnomad/gnomad-reads-server
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-reads-server
     newTag: 'ab4ac608'
