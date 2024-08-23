@@ -59,6 +59,7 @@ You can then add additional resources to the new kustomization.yaml file, or pat
 When you're ready, test that your configuration renders as expect it, and apply it with:
 
 ```bash
+# TODO: Set your kubectl context to point to the correct cluster
 kustomize build . # confirm that the configuration builds and is what you want
 kustomize build . | kubectl apply -f - # apply the configuration to the cluster
 ```
