@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollout-reads
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gnomad-reads
+  workloadRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: gnomad-reads
+    scaleDown: onsuccess
+  strategy:
+    blueGreen:
+      activeService: reads-bluegreen-active
+      previewService: reads-bluegreen-preview
+      autoPromotionEnabled: false
