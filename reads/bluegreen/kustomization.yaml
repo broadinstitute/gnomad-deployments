@@ -1,11 +1,21 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+configurations:
+  # include this to allow for kustomize to apply suffixes to services in the rollout manifest
+  - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
 resources:
   - ../base
   - rollout.yaml
   - active-service.yaml
   - preview-service.yaml
+labels:
+  - pairs:
+      environment: prod
+      component: reads
+    includeSelectors: true
+    includeTemplates: true
+nameSuffix: -prod
 images:
   - name: gnomad-reads-server
     newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-server
@@ -13,17 +23,3 @@ images:
   - name: gnomad-reads-api
     newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-api
     newTag: 'dev-6cfd6ae0-reads_deployment'
-patches:
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: gnomad-reads
-      spec:
-        replicas: 0
-        template:
-          spec:
-            volumes:
-              - name: readviz
-                gcePersistentDisk:
-                  pdName: readviz-empty-test
