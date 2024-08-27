@@ -20,6 +20,7 @@ patches:
       metadata:
         name: gnomad-reads
       spec:
+        replicas: 0
         template:
           spec:
             volumes:

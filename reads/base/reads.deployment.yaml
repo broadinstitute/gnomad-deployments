@@ -6,8 +6,7 @@ metadata:
   labels:
     component: gnomad-reads
 spec:
-  # TODO: work out how to best default this to non zero
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: gnomad-reads
