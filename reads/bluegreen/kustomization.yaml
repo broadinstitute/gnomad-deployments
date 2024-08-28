@@ -4,6 +4,10 @@ kind: Kustomization
 configurations:
   # include this to allow for kustomize to apply suffixes to services in the rollout manifest
   - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+replicas:
+  # scale the Deployment to 0 -- for prod replicas are managed by the rollout
+  - name: gnomad-reads
+    count: 0
 resources:
   - ../base
   - rollout.yaml
