@@ -4,7 +4,7 @@ apiVersion: apps/v1
 metadata:
   name: gnomad-reads
   labels:
-    component: gnomad-reads
+    app: gnomad-reads
 spec:
   replicas: 1
   selector:
