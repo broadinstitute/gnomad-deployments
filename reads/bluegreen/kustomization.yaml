@@ -22,8 +22,8 @@ labels:
 nameSuffix: -prod
 images:
   - name: gnomad-reads-server
-    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-server
-    newTag: 'dev-6cfd6ae0-reads_deployment'
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-reads-server
+    newTag: 'ab4ac608'
   - name: gnomad-reads-api
-    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-api
-    newTag: 'dev-6cfd6ae0-reads_deployment'
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-reads-api
+    newTag: 'ab4ac608'
