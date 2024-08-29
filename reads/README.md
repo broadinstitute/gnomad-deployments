@@ -22,6 +22,24 @@ To update the production reads service, update the image tag in the `bluegreen/k
 
 After verifying the preview deployment, you can promote the preview deployment to production using the `kubectl argo rollouts promote` command, or by clicking the "Promote" button in the Argo CD UI.
 
+### Development
+
+To deploy a standalone development version of the reads service, you can run the following command, you can deploy the base configuration without modifications by running:
+
+```sh
+# First, ensure that your kubectl context is set to the correct cluster
+kustomize build base | kubectl apply -f -
+```
+
+If you need to change anything about the base deployment, such as the persistent disk name or adding a name prefix or suffix, you can create a new folder at the same level as `base/`, and then use kustomize to create a new overlay:
+
+```sh
+mkdir my-reads && cd my-reads
+kustomize init --resource=../base
+```
+
+Then you can add the necessary patches to your kustomization. See the examples below for common patches.
+
 ## Common patches
 
 ### Overriding the default persistent data volume:
@@ -42,3 +60,22 @@ patches:
                 gcePersistentDisk:
                   pdName: readviz-empty-test
 ```
+
+### Adding a name suffix to the deployment:
+
+```yaml
+# in kustomization.yaml, add:
+nameSuffix: "-test"
+```
+
+### Overriding the default images:
+
+```yaml
+# in kustomization.yaml, add:
+images:
+  - name: gnomad-reads-server
+    newName: us-docker.pkg.dev/gnomadec/gnomad/gnomad-reads-server
+    newTag: 'my-fancy-reads-image'
+  - name: gnomad-reads-api
+    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-api
+    newTag: 'my-fancy-reads-api-image'
