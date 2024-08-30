@@ -12,9 +12,9 @@
     kubectl create configmap proxy-ips --from-literal=ips="your.load.balacer.ip,127.0.0.1"
   ```
 
-- The reads service requires a persistent disk to be provisioned with data. You can then reference the name of that disk in the deployment manifest, with the `readviz` volume in the Deployment manifest. See [Common patches](#common-patches) for an example of how to override the persistent disk name for testing. If you are updating a production environment, you should set the default persistent disk name in the Deployment manifest in `base/`.
+  If you're running something in development and don't necessarily care if remote/user IP addresses are reported correctly, a value of `"127.0.0.1"` is sufficient.
 
-If you're running something in development and don't necessarily care if remote/user IP addresses are reported correctly, a value of `"127.0.0.1"` is sufficient.
+- The reads service requires a persistent disk to be provisioned with data. You can then reference the name of that disk in the deployment manifest, with the `readviz` volume in the Deployment manifest. See [Common patches](#common-patches) for an example of how to override the persistent disk name for testing. If you are updating a production environment, you should set the default persistent disk name in the Deployment manifest in `base/`.
 
 ### Production
 
