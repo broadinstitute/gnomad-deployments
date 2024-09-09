@@ -17,3 +17,4 @@ spec:
       activeService: reads-bluegreen-active
       previewService: reads-bluegreen-preview
       autoPromotionEnabled: false
+      scaleDownDelaySeconds: 1200
