@@ -1,0 +1,36 @@
+# To keep kustomize from putting labels into the Rollout spec/template/metadata/labels spec where it shouldn't do that,
+# we need to list all the resources here that we DO want to apply labels to
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: selective-labels
+labels:
+  environment: prod
+  component: reads
+fieldSpecs:
+  - path: metadata/labels
+    create: true
+    kind: Rollout
+    name: 'rollout-reads'
+  - path: spec/selector/matchLabels
+    create: true
+    kind: Rollout
+    name: 'rollout-reads'
+  - path: metadata/labels
+    kind: Service
+    create: true
+  - path: spec/selector
+    kind: Service
+    create: true
+  - path: metadata/labels
+    create: true
+    kind: Deployment
+    name: 'gnomad-reads'
+  - path: spec/selector/matchLabels
+    create: true
+    kind: Deployment
+    name: 'gnomad-reads'
+  - path: spec/template/metadata/labels
+    create: true
+    kind: Deployment
+    name: 'gnomad-reads'

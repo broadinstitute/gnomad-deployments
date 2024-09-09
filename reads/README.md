@@ -52,13 +52,12 @@ patches:
       metadata:
         name: gnomad-reads
       spec:
-        replicas: 0
         template:
           spec:
             volumes:
               - name: readviz
                 gcePersistentDisk:
-                  pdName: readviz-empty-test
+                  pdName: test-readviz-data
 ```
 
 ### Adding a name suffix to the deployment:
@@ -74,7 +73,7 @@ nameSuffix: "-test"
 # in kustomization.yaml, add:
 images:
   - name: gnomad-reads-server
-    newName: us-docker.pkg.dev/gnomadec/gnomad/gnomad-reads-server
+    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-server
     newTag: 'my-fancy-reads-image'
   - name: gnomad-reads-api
     newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-reads-api

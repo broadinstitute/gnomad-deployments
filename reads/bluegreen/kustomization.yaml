@@ -4,6 +4,9 @@ kind: Kustomization
 configurations:
   # include this to allow for kustomize to apply suffixes to services in the rollout manifest
   - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+transformers:
+  # to deal with bad intersections between kustomize and the rollout transformer, apply our own labels
+  - apply-labels.yaml
 replicas:
   # scale the Deployment to 0 -- for prod replicas are managed by the rollout
   - name: gnomad-reads
@@ -13,12 +16,6 @@ resources:
   - rollout.yaml
   - active-service.yaml
   - preview-service.yaml
-labels:
-  - pairs:
-      environment: prod
-      component: reads
-    includeSelectors: true
-    includeTemplates: true
 nameSuffix: -prod
 images:
   - name: gnomad-reads-server
