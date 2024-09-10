@@ -58,6 +58,8 @@ patches:
               - name: readviz
                 gcePersistentDisk:
                   pdName: test-readviz-data
+                  # optionally, add readOnly: false for a read/write disk
+                  # readonly: false
 ```
 
 ### Adding a name suffix to the deployment:
