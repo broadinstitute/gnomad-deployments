@@ -36,3 +36,13 @@ patches:
       version: v1
       kind: Ingress
       name: demo-ingress
+  - patch: |-
+      - op: replace
+        path: /spec/domains
+        value:
+        - new-feature.gnomad.the-tgg.dev
+    target:
+      group: networking.gke.io
+      version: v1
+      kind: ManagedCertificate
+      name: demo-certificate
