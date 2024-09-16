@@ -20,7 +20,7 @@
 
 To update the production reads service, update the image tag in the `bluegreen/kustomization.yaml` file, and open a PR. After review and merge, the service will automatically deploy to a preview environment. You can test/verify the preview deployment by setting your reads API URL to `https://gnomad.broadinstitute.org/reads-preview`.
 
-After verifying the preview deployment, you can promote the preview deployment to production using the `kubectl argo rollouts promote` command, or by clicking the "Promote" button in the Argo CD UI.
+After verifying the preview deployment, you can promote the preview deployment to production using the `kubectl argo rollouts promote` command, or by clicking the "Promote" button in the Argo CD UI. The argo subcommand for kubectl can be installed via one of the methods documented at: https://argo-rollouts.readthedocs.io/en/stable/installation/#kubectl-plugin-installation.
 
 ### Development
 
