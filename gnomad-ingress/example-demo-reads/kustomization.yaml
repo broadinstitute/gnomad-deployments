@@ -1,0 +1,48 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../demo
+nameSuffix: -newfeature
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/rules/0/http/paths/0/backend/service/name
+        value: demo-browser-newfeature
+      - op: add
+        path: /spec/rules/0/http/paths/-
+        value:
+          path: "/reads"
+          backend:
+            service:
+              name: demo-reads-service
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+      - op: add
+        path: /spec/rules/0/http/paths/-
+        value:
+          path: "/reads/*"
+          backend:
+            service:
+              name: demo-reads-service
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+      - op: replace
+        path: /spec/rules/0/host
+        value: new-feature.gnomad.the-tgg.dev
+    target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: demo-ingress
+  - patch: |-
+      - op: replace
+        path: /spec/domains
+        value:
+        - new-feature.gnomad.the-tgg.dev
+    target:
+      group: networking.gke.io
+      version: v1
+      kind: ManagedCertificate
+      name: demo-certificate

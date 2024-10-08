@@ -1,0 +1,7 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: demo-certificate
+spec:
+  domains:
+    - my-demo.gnomad.the-tgg.dev
