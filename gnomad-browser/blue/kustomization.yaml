@@ -1,20 +1,13 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - https://github.com/broadinstitute/gnomad-browser//deploy/manifests/browser/base?timeout=120&ref=a74e10c606912738f14fe7ffca8ec05d9f9c732d
+nameSuffix: -blue
 labels:
   - pairs:
       deployment: blue
-      tier: production
     includeSelectors: true
     includeTemplates: true
-nameSuffix: -blue
-images:
-  - name: gcr.io/exac-gnomad/gnomad-api
-    newTag: '5fe6dfed'
-  - name: gcr.io/exac-gnomad/gnomad-browser
-    newTag: '5fe6dfed'
+resources:
+  - ../base
 replacements:
   - source:
       fieldPath: metadata.name
@@ -23,10 +16,7 @@ replacements:
       version: v1
     targets:
       - fieldPaths:
-          - spec.template.spec.containers.[name=web].env.[name=API_URL].value
-        options:
-          delimiter: /
-          index: 2
+          - spec.template.spec.containers.[name=browser].env.[name=API_URL].value
         select:
           group: apps
           kind: Deployment
