@@ -20,7 +20,7 @@ replacements:
 images:
 - name: gnomad-api-nginx
   newName: nginx
-  newTag: 1.27.2
+  newTag: 9d45090
 - name: gnomad-browser-nginx
   newName: nginx
-  newTag: 1.27.2
+  newTag: 9d45090
