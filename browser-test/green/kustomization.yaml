@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+nameSuffix: -green
+resources:
+- ../base
+replacements:
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: gnomad-api
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.[name=browser].env.[name=API_URL].value
+    select:
+      group: apps
+      kind: Deployment
+      name: gnomad-browser
+      version: v1
+images:
+- name: gnomad-api-nginx
+  newName: nginx
+  newTag: 1.27.2
+- name: gnomad-browser-nginx
+  newName: nginx
+  newTag: 1.27.2
