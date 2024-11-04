@@ -19,8 +19,8 @@ replacements:
       version: v1
 images:
 - name: gnomad-api-nginx
-  newName: nginx
-  newTag: 9d45090
+  newName: tgg-sre-testing/nginx
+  newTag: 58d0609
 - name: gnomad-browser-nginx
-  newName: nginx
-  newTag: 9d45090
+  newName: tgg-sre-testing/nginx
+  newTag: 58d0609
