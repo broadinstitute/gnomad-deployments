@@ -1,0 +1,32 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+commonLabels:
+  deployment: 'blue'
+nameSuffix: '-blue'
+images:
+  - name: gnomad-api
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+    newTag: '57ddae3e'
+  - name: gnomad-browser
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+    newTag: '57ddae3e'
+replacements:
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: gnomad-api
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.env.0.value
+    options:
+      delimiter: /
+      index: 2
+    select:
+      group: apps
+      kind: Deployment
+      name: gnomad-browser
+      version: v1
