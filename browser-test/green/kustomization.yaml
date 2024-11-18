@@ -18,9 +18,14 @@ replacements:
       name: gnomad-browser
       version: v1
 images:
+- name: gnomad-api
+  newName: us-docker.pkg.dev/tgg-sre-testing/gnomad/gnomad-api
+  newTag: testing-priv-build-1
 - name: gnomad-api-nginx
   newName: tgg-sre-testing/nginx
   newTag: 58d0609
 - name: gnomad-browser-nginx
   newName: tgg-sre-testing/nginx
   newTag: 58d0609
+- name: gnomad-browser-us-docker.pkg.dev/tgg-sre-testing/gnomad/gnomad-browser
+  newTag: testing-priv-build-1
