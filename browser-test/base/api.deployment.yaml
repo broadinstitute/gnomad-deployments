@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: gnomad-api-nginx
+          image: gnomad-api
           ports:
             - containerPort: 80
           volumeMounts:

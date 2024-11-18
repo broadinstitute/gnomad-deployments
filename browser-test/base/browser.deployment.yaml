@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: browser
-          image: gnomad-browser-nginx
+          image: gnomad-browser
           env:
             - name: API_URL
               value: 'gnomad-api' # The service URL you want to proxy to
