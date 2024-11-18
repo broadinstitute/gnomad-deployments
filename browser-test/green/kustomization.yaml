@@ -20,7 +20,7 @@ replacements:
 images:
 - name: gnomad-api
   newName: us-docker.pkg.dev/tgg-sre-testing/gnomad/gnomad-api
-  newTag: testing-priv-build-1
+  newTag: testing-priv-build-2
 - name: gnomad-browser
   newName: us-docker.pkg.dev/tgg-sre-testing/gnomad/gnomad-browser
-  newTag: testing-priv-build-1
+  newTag: testing-priv-build-2
