@@ -1,0 +1,49 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ingress.yaml
+  - backendconfig.yaml
+  - managed-certificate.yaml
+nameSuffix: -demo
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      environment: qa
+      name: gnomad-sumstats-demo
+images:
+  - name: gnomad-sumstats
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-sumstats-explorer
+    newTag: abcdef1
+patches:
+  - patch: |-
+      kind: Service
+      apiVersion: v1
+      metadata:
+        name: gnomad-sumstats
+        annotations:
+          cloud.google.com/backend-config: '{"default": "gnomad-sumstats-bc-demo"}'
+  - patch: |-
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: gnomad-sumstats
+      spec:
+        template:
+          spec:
+            tolerations:
+              - key: "volatile"
+                operator: "Equal"
+                value: "true"
+                effect: "NoSchedule"
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: gnomad-sumstats
+      spec:
+        template:
+          spec:
+            nodeSelector:
+              cloud.google.com/gke-nodepool: 'demo-pool'
