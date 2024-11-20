@@ -3,17 +3,17 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../prod
-nameSuffix: '-blue'
+nameSuffix: '-green'
 labels:
   - pairs:
-      deployment: blue
+      deployment: green
     includeSelectors: true
     includeTemplates: true
 images:
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newTag: '9503aafa'
+    newTag: 'b2501e61'
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newTag: '9503aafa'
+    newTag: 'b2501e61'
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
   - source:

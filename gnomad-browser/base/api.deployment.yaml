@@ -4,21 +4,24 @@ apiVersion: apps/v1
 metadata:
   name: gnomad-api
   labels:
-    component: gnomad-api
+    app: gnomad-browser
+    component: api
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       name: gnomad-api
+      component: api
   template:
     metadata:
       labels:
         name: gnomad-api
+        component: api
     spec:
       serviceAccountName: gnomad-api
       containers:
         - name: app
-          image: gnomad-api
+          image: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
           imagePullPolicy: Always
           env:
             - name: PORT
@@ -53,29 +56,19 @@ spec:
               value: '25'
             - name: MAX_QUERY_COST_PER_MINUTE
               value: '300'
-            - name: JSON_CACHE_PATH
-              value: 'gs://gnomad-v4-gene-cache/2023-12-01'
-            - name: JSON_CACHE_LARGE_GENES
-              value: 'true'
-            - name: JSON_CACHE_COMPRESSION
-              value: 'true'
-            - name: NODE_OPTIONS
-              value: '--max-old-space-size=10240'
           ports:
             - name: http
               containerPort: 8000
           resources:
             requests:
               cpu: '1'
-              memory: '11Gi'
+              memory: '3Gi'
             limits:
               cpu: '2'
-              memory: '12Gi'
+              memory: '4Gi'
           readinessProbe:
             httpGet:
               path: /health/ready
               port: http
             initialDelaySeconds: 3
             periodSeconds: 10
-      nodeSelector:
-        cloud.google.com/gke-nodepool: 'main-pool'
