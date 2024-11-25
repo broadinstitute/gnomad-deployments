@@ -4,3 +4,4 @@ resources:
   - ./api.deployment.yaml
   - ./api.service.yaml
   - ./browser.deployment.yaml
+  - ./browser.service.yaml
