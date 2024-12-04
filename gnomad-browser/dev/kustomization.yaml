@@ -8,9 +8,6 @@ labels:
       environment: demo
     includeSelectors: true
     includeTemplates: true
-replicas:
-  - name: gnomad-api
-    count: 1
 patches:
   - patch: |-
       apiVersion: apps/v1
