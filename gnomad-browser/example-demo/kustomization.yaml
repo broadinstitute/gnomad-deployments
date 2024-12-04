@@ -4,19 +4,19 @@ kind: Kustomization
 resources:
   - ../demo
   - ingress.yaml
-nameSuffix: '-example'
+nameSuffix: '-PLACEHOLDER'
 labels:
   - pairs:
-      deployment: example
+      deployment: PLACEHOLDER
     includeSelectors: true
     includeTemplates: true
 images:
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
     newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
-    newTag: 'demo-example'
+    newTag: 'DOCKERTAG'
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
     newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
-    newTag: 'demo-example'
+    newTag: 'DOCKERTAG'
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
   - source:
