@@ -6,7 +6,7 @@ metadata:
   labels:
     tier: demo
   annotations:
-    cloud.google.com/backend-config: '{{"ports": {{"80":"gnomad-backend-config"}}}}'
+    cloud.google.com/backend-config: '{{"ports": {{"80":"gnomad-backend-config-purplered"}}}}'
 spec:
   type: NodePort
   selector:
