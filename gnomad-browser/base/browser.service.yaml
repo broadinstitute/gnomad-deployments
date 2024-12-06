@@ -14,4 +14,4 @@ spec:
     name: gnomad-browser
   ports:
     - port: 80
-      targetPort: 8000
+      targetPort: 80
