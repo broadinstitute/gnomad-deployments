@@ -1,0 +1,9 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: gnomad-backend-config
+spec:
+  timeoutSec: 60
+  securityPolicy:
+    # This is managed as a cloudarmor policy in terraform
+    name: 'deny-problematic-requests'
