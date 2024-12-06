@@ -12,10 +12,10 @@ labels:
 images:
 - name: gnomad-api
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-  newTag: 3f2332e
+  newTag: 7f72871
 - name: gnomad-browser
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-  newTag: 3f2332e
+  newTag: 7f72871
 - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
   newTag: 978671a2
 - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
