@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../dev
+  - ingress.yaml
+nameSuffix: '-purple'
+labels:
+  - pairs:
+      deployment: purple
+    includeSelectors: true
+    includeTemplates: true
+images:
+  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
+    newTag: '5768d151'
+  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
+    newTag: '5768d151'
+# This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
+replacements:
+  - source:
+      fieldPath: metadata.name
+      kind: Service
+      name: gnomad-api
+      version: v1
+    targets:
+      - fieldPaths:
+          - spec.template.spec.containers.0.env.0.value
+        options:
+          delimiter: /
+          index: 2
+        select:
+          group: apps
+          kind: Deployment
+          name: gnomad-browser
+          version: v1
