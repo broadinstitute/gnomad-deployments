@@ -14,6 +14,30 @@ images:
     newTag: 'b2501e61'
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
     newTag: 'b2501e61'
+patches:
+- target:
+    kind: Ingress
+    name: gnomad-ingress
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: green.gnomad.the-tgg.dev
+- target:
+    kind: Ingress
+    name: gnomad-ingress
+  patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        networking.gke.io/managed-certificates: env-managed-cert-green
+        networking.gke.io/v1beta1.FrontendConfig: gnomad-frontend-config-green
+- target:
+    kind: ManagedCertificate
+    name: env-managed-cert
+  patch: |-
+    - op: replace
+      path: /spec/domains/0
+      value: green.gnomad.the-tgg.dev
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
   - source:
