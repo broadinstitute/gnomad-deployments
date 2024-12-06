@@ -13,7 +13,7 @@ spec:
     app: gnomad-browser
     name: gnomad-browser
     component: frontend
-    deployment: red
+    deployment: purple
     environment: demo
   ports:
     - port: 80
