@@ -1,35 +1,40 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../dev
-  - ingress.yaml
-nameSuffix: '-red'
+- ../dev
+- ingress.yaml
+nameSuffix: -red
 labels:
-  - pairs:
-      deployment: red
-    includeSelectors: true
-    includeTemplates: true
+- includeSelectors: true
+  includeTemplates: true
+  pairs:
+    deployment: red
 images:
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newTag: '978671a2'
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newTag: '978671a2'
+- name: gnomad-api
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+  newTag: 3f2332e
+- name: gnomad-browser
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+  newTag: 3f2332e
+- name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+  newTag: 978671a2
+- name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+  newTag: 978671a2
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
-  - source:
-      fieldPath: metadata.name
-      kind: Service
-      name: gnomad-api
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: gnomad-api
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.env.0.value
+    options:
+      delimiter: /
+      index: 2
+    select:
+      group: apps
+      kind: Deployment
+      name: gnomad-browser
       version: v1
-    targets:
-      - fieldPaths:
-          - spec.template.spec.containers.0.env.0.value
-        options:
-          delimiter: /
-          index: 2
-        select:
-          group: apps
-          kind: Deployment
-          name: gnomad-browser
-          version: v1
