@@ -12,10 +12,8 @@ labels:
     includeTemplates: true
 images:
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
     newTag: '978671a2'
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newName: us-docker.pkg.dev/gnomadev/gnomad/gnomad-api
     newTag: '978671a2'
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
