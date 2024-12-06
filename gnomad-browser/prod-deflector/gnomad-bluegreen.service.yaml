@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gnomad-browser-bluegreen
+  name: gnomad-browser-purplered
   labels:
-    tier: production
+    tier: demo
   annotations:
     cloud.google.com/backend-config: '{{"ports": {{"80":"gnomad-backend-config"}}}}'
 spec:
@@ -13,8 +13,8 @@ spec:
     app: gnomad-browser
     name: gnomad-browser
     component: frontend
-    deployment: blue
-    environment: prod
+    deployment: purple
+    environment: dev
   ports:
     - port: 80
       targetPort: 80
