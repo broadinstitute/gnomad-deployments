@@ -17,6 +17,7 @@ spec:
       labels:
         name: gnomad-api
         component: api
+        app: gnomad-browser
     spec:
       serviceAccountName: gnomad-api
       containers:
