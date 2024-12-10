@@ -5,6 +5,3 @@ demo:
 	cp -r example-demo $(demo_name)
 	sed -i '' 's/PLACEHOLDER/$(demo_name)/g' $(demo_name)/kustomization.yaml
 	sed -i '' 's/DOCKERTAG/$(docker_tag)/g' $(demo_name)/kustomization.yaml
-
-clean:
-	rm -rf ./$(demo_name)
