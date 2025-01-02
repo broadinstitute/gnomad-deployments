@@ -51,7 +51,19 @@ Once that deployment is complete, you can test/demo the new blue/green environme
 
 ### Development / Demo
 
-To deploy a demo version of the browser, cd to the gnomad-browser directory, and init a new kustomization layer that inherits from the damo layer:
+For ease of use, there is a `example-demo` template and a `make` task that can be run to generate a new demo. The make task takes two parameters:
+
+1. demo_name: The suffix you want to apply to your demo
+2. docker_tag: The docker image tag you want to apply to your demo deployment. **The docker image will reference the `gnomadev` docker registry.**
+
+The make file will create a new folder with your kustomization in it, which you can then tweak as needed.
+
+```sh
+cd gnomad-browser
+make demo demo_name=my-demo docker_tag=abcdef1
+```
+
+If you would like to generate a new deployment manually, cd to the gnomad-browser directory, and init a new kustomization layer that inherits from the demo layer (or, optionally, a different layer of your choice):
 
 ```sh
   cd gnomad-browser
