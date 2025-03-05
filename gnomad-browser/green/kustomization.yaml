@@ -1,58 +1,63 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../prod
-nameSuffix: '-green'
+- ../prod
+nameSuffix: -green
 labels:
-  - pairs:
-      deployment: green
-    includeSelectors: true
-    includeTemplates: true
+- includeSelectors: true
+  includeTemplates: true
+  pairs:
+    deployment: green
 images:
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newTag: 'b2501e61'
-  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newTag: 'b2501e61'
+- name: gnomad-api
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+  newTag: d71262d
+- name: gnomad-browser
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+  newTag: d71262d
+- name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+  newTag: b2501e61
+- name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+  newTag: b2501e61
 patches:
-- target:
-    kind: Ingress
-    name: gnomad-ingress
-  patch: |-
+- patch: |-
     - op: replace
       path: /spec/rules/0/host
       value: green.gnomad.the-tgg.dev
-- target:
+  target:
     kind: Ingress
     name: gnomad-ingress
-  patch: |-
+- patch: |-
     - op: add
       path: /metadata/annotations
       value:
         networking.gke.io/managed-certificates: env-managed-cert-green
         networking.gke.io/v1beta1.FrontendConfig: gnomad-frontend-config-green
-- target:
-    kind: ManagedCertificate
-    name: env-managed-cert
-  patch: |-
+  target:
+    kind: Ingress
+    name: gnomad-ingress
+- patch: |-
     - op: replace
       path: /spec/domains/0
       value: green.gnomad.the-tgg.dev
+  target:
+    kind: ManagedCertificate
+    name: env-managed-cert
 # This replacement must be done in this kustomization, to ensure that the name nameSuffix is applied to the API_URL
 replacements:
-  - source:
-      fieldPath: metadata.name
-      kind: Service
-      name: gnomad-api
+- source:
+    fieldPath: metadata.name
+    kind: Service
+    name: gnomad-api
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.env.0.value
+    options:
+      delimiter: /
+      index: 2
+    select:
+      group: apps
+      kind: Deployment
+      name: gnomad-browser
       version: v1
-    targets:
-      - fieldPaths:
-          - spec.template.spec.containers.0.env.0.value
-        options:
-          delimiter: /
-          index: 2
-        select:
-          group: apps
-          kind: Deployment
-          name: gnomad-browser
-          version: v1
