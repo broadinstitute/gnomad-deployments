@@ -26,4 +26,4 @@ patches:
             volumes:
               - name: data
                 gcePersistentDisk:
-                  pdName: exome-results-browsers-data-250220-1728
+                  pdName: exome-results-browsers-data-250512-1648
