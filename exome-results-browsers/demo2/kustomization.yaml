@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ingress.yaml
+namePrefix: demo2-
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      environment: qa
+      name: demo2-exome-results-browsers
+images:
+  - name: exome-results-browsers
+    newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
+    newTag: 5e495fb_2025-06-04_gp2-demo
+patches:
+  - patch: |-
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: exome-results-browsers
+      spec:
+        template:
+          spec:
+            volumes:
+              - name: data
+                gcePersistentDisk:
+                  pdName: exome-results-browsers-gp2-demo-data-2025-06-04--12-34
