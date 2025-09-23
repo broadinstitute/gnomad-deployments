@@ -47,3 +47,12 @@ spec:
                 port:
                   number: 80
             pathType: ImplementationSpecific
+    - host: gp2.broadinstitute.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: exome-results-browsers
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
