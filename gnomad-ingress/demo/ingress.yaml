@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    networking.gke.io/managed-certificates: demo-certificate
+    networking.gke.io/v1beta1.FrontendConfig: demo-frontendconfig
+spec:
+  rules:
+    - host: my-demo.gnomad.the-tgg.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: demo-browser
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
