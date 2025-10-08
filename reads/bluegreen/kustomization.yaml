@@ -20,7 +20,7 @@ nameSuffix: -prod
 images:
   - name: gnomad-reads-server
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-reads-server
-    newTag: '37d9014'
+    newTag: 'ff83069'
   - name: gnomad-reads-api
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-reads-api
-    newTag: '37d9014'
+    newTag: 'ff83069'
