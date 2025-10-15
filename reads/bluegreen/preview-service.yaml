@@ -3,7 +3,6 @@ kind: Service
 metadata:
   labels:
     app: gnomad-reads
-    role: preview
   name: reads-bluegreen-preview
 spec:
   selector:
