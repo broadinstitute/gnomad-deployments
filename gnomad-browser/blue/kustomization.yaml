@@ -12,10 +12,10 @@ labels:
 images:
   - name: gnomad-api
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newTag: 884479b
+    newTag: d9fbcc26
   - name: gnomad-browser
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newTag: 884479b
+    newTag: d9fbcc26
 patches:
 - target:
     kind: Ingress
