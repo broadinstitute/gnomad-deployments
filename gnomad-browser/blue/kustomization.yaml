@@ -10,11 +10,9 @@ labels:
     includeSelectors: true
     includeTemplates: true
 images:
-  - name: gnomad-api
-    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
     newTag: d9fbcc26
-  - name: gnomad-browser
-    newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
+  - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
     newTag: d9fbcc26
 patches:
 - target:
