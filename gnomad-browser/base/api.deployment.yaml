@@ -22,7 +22,7 @@ spec:
       serviceAccountName: gnomad-api
       containers:
         - name: app
-          image: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+          image: gnomad-api
           imagePullPolicy: Always
           env:
             - name: PORT

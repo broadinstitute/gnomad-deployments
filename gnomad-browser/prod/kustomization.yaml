@@ -11,6 +11,11 @@ labels:
       environment: prod
     includeSelectors: true
     includeTemplates: true
+images:
+- name: gnomad-api
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
+- name: gnomad-browser
+  newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
 replicas:
   - name: gnomad-api
     count: 2
@@ -62,5 +67,4 @@ patches:
             nodeSelector:
               cloud.google.com/gke-nodepool: 'main-pool'
     target:
-      kind: Deployment
       labelSelector: 'app=gnomad-browser'
