@@ -11,10 +11,10 @@ labels:
 images:
 - name: gnomad-api
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-  newTag: 1308b79b
+  newTag: 931c5858-mt-haplotype-dual-totals
 - name: gnomad-browser
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-  newTag: 1308b79b
+  newTag: 931c5858-mt-haplotype-dual-totals
 patches:
 - patch: |-
     - op: replace
