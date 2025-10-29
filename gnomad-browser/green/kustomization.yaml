@@ -11,7 +11,7 @@ labels:
 images:
 - name: gnomad-api
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-  newTag: 931c5858-mt-haplotype-dual-totals
+  newTag: 04a4f6b7
 - name: gnomad-browser
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
   newTag: 931c5858-mt-haplotype-dual-totals
