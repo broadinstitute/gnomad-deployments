@@ -11,9 +11,9 @@ labels:
     includeTemplates: true
 images:
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-api
-    newTag: d9fbcc26
+    newTag: 0be5013d
   - name: us-docker.pkg.dev/exac-gnomad/gnomad/gnomad-browser
-    newTag: d9fbcc26
+    newTag: 0be5013d
 patches:
 - target:
     kind: Ingress
