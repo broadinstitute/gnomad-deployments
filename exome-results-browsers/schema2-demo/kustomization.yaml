@@ -13,7 +13,7 @@ labels:
 images:
   - name: exome-results-browsers
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: 36e6c8a-schema2-demo-2025-12-11--18-09
+    newTag: 72e9c79-schema2-demo-2025-12-12--11-20
 patches:
   - patch: |-
       kind: Deployment
