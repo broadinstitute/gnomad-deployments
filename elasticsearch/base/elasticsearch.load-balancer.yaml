@@ -8,6 +8,7 @@ spec:
   type: LoadBalancer
   loadBalancerSourceRanges:
     - 192.168.255.0/24 # Must match IP range for Dataproc subnet
+    - 10.10.0.0/24 # IP range for gnomad nok8s subnet
   ports:
     - name: http
       port: 9200
