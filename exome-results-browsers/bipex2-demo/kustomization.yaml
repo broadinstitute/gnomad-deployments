@@ -26,4 +26,4 @@ patches:
             volumes:
               - name: data
                 gcePersistentDisk:
-                  pdName: erb-data-bipex2-demo-2026-04-15--12-25
+                  pdName: erb-data-bipex2-demo-2026-04-27--14-43
