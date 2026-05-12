@@ -5,7 +5,7 @@ metadata:
   name: exome-results-browsers-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: prod-exome-results-browsers-ip
-    networking.gke.io/managed-certificates: "exome-results-browsers-managed-cert, exome-results-browsers-managed-cert-v2"
+    networking.gke.io/managed-certificates: exome-results-browsers-managed-cert-v2
     networking.gke.io/v1beta1.FrontendConfig: exome-results-browsers-frontend-config
   labels:
     service: exome-results-browsers
