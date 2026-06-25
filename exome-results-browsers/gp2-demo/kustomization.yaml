@@ -13,7 +13,7 @@ labels:
 images:
   - name: exome-results-browsers
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: 91b1b25-gp2-demo-2026-06-24--21-32
+    newTag: 314d7fa-gp2-demo-2026-06-25--11-34
 patches:
   - patch: |-
       kind: Deployment
@@ -26,4 +26,4 @@ patches:
             volumes:
               - name: data
                 gcePersistentDisk:
-                  pdName: erb-data-gp2-demo-2026-06-17--19-12
+                  pdName: erb-data-gp2-demo-2026-06-25--09-26 
