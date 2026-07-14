@@ -1,0 +1,7 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: sumstats-gnomad-cert
+spec:
+  domains:
+    - sumstats.gnomad.the-tgg.dev
