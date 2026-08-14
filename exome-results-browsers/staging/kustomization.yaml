@@ -6,6 +6,9 @@ resources:
   - ingress.yaml
   - certificate.yaml
 namePrefix: staging-
+replicas:
+  - name: exome-results-browsers
+    count: 0
 labels:
   - includeSelectors: true
     includeTemplates: true
