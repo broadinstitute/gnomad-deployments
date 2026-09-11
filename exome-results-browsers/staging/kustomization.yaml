@@ -8,7 +8,7 @@ resources:
 namePrefix: staging-
 replicas:
   - name: exome-results-browsers
-    count: 0
+    count: 1
 labels:
   - includeSelectors: true
     includeTemplates: true
@@ -18,7 +18,7 @@ labels:
 images:
   - name: exome-results-browsers
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: a21081e-erb-prod-2026-08-14--13-50
+    newTag: 14f3bd4-asc2-demo-2026-09-10--11-30
 patches:
   - patch: |-
       kind: Deployment
@@ -31,4 +31,4 @@ patches:
             volumes:
               - name: data
                 gcePersistentDisk:
-                  pdName: erb-data-prod-2026-08-12--16-29
+                  pdName: erb-data-asc2-demo-2026-09-09--19-54
