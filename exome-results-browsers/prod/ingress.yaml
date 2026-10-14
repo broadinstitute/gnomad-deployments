@@ -5,13 +5,22 @@ metadata:
   name: exome-results-browsers-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: prod-exome-results-browsers-ip
-    networking.gke.io/managed-certificates: exome-results-browsers-managed-cert-v2
+    networking.gke.io/managed-certificates: "exome-results-browsers-managed-cert-v2, exome-results-browsers-managed-cert-v3"
     networking.gke.io/v1beta1.FrontendConfig: exome-results-browsers-frontend-config
   labels:
     service: exome-results-browsers
 spec:
   rules:
     - host: asc.broadinstitute.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: exome-results-browsers
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
+    - host: agb.broadinstitute.org
       http:
         paths:
           - backend:
@@ -57,6 +66,15 @@ spec:
                   number: 80
             pathType: ImplementationSpecific
     - host: ibdseq.broadinstitute.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: exome-results-browsers
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
+    - host: parkinsons.broadinstitute.org
       http:
         paths:
           - backend:
