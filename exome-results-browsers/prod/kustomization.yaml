@@ -5,6 +5,7 @@ resources:
 - frontendconfig.yaml
 - ingress.yaml
 - certificate-v2.yaml
+- certificate-v3.yaml
 labels:
 - includeSelectors: true
   includeTemplates: true
