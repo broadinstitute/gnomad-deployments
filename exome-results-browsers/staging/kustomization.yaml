@@ -18,7 +18,7 @@ labels:
 images:
   - name: exome-results-browsers
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: 9833ea3-erb-staging-2026-10-14--07-43
+    newTag: b55e29b-erb-staging-2026-10-14--10-27
 patches:
   - patch: |-
       kind: Deployment
