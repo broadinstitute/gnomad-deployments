@@ -46,5 +46,5 @@ spec:
         - name: data
           gcePersistentDisk:
             fsType: ext4
-            pdName: erb-data-prod-2026-10-01--14-26
+            pdName: erb-data-prod-2026-10-20--19-56
             readOnly: true
