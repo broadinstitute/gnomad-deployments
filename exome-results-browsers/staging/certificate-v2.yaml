@@ -1,12 +1,14 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: exome-results-browsers-managed-cert
+  name: exome-results-browsers-managed-cert-v2
 spec:
   domains:
     - asc.the-tgg.dev
+    - agb.the-tgg.dev
     - bipex.the-tgg.dev
     - epi25.the-tgg.dev
     - gp2.the-tgg.dev
     - ibdseq.the-tgg.dev
+    - parkinsons.the-tgg.dev
     - schema.the-tgg.dev

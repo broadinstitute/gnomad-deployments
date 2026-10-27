@@ -5,13 +5,22 @@ metadata:
   name: exome-results-browsers-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: staging-exome-results-browsers-ip
-    networking.gke.io/managed-certificates: staging-exome-results-browsers-managed-cert
+    networking.gke.io/managed-certificates: staging-exome-results-browsers-managed-cert-v2
     networking.gke.io/v1beta1.FrontendConfig: staging-exome-results-browsers-frontend-config
   labels:
     service: exome-results-browsers
 spec:
   rules:
     - host: asc.the-tgg.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: exome-results-browsers
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
+    - host: agb.the-tgg.dev
       http:
         paths:
           - backend:

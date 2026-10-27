@@ -4,7 +4,7 @@ resources:
   - ../base
   - frontendconfig.yaml
   - ingress.yaml
-  - certificate.yaml
+  - certificate-v2.yaml
 namePrefix: staging-
 replicas:
   - name: exome-results-browsers
@@ -18,7 +18,7 @@ labels:
 images:
   - name: exome-results-browsers
     newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-    newTag: a21081e-erb-prod-2026-08-14--13-50
+    newTag: b10637a-erb-staging-2026-10-14--10-53
 patches:
   - patch: |-
       kind: Deployment
@@ -31,4 +31,4 @@ patches:
             volumes:
               - name: data
                 gcePersistentDisk:
-                  pdName: erb-data-prod-2026-08-12--16-29
+                  pdName: erb-data-prod-2026-10-13--18-13
