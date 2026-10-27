@@ -4,7 +4,7 @@ resources:
 - ../base
 - frontendconfig.yaml
 - ingress.yaml
-- certificate-v2.yaml
+- certificate-v3.yaml
 labels:
 - includeSelectors: true
   includeTemplates: true
@@ -13,4 +13,4 @@ labels:
 images:
 - name: exome-results-browsers
   newName: us-docker.pkg.dev/exac-gnomad/gnomad/exome-results-browsers
-  newTag: 4d57257-erb-prod-2026-08-14--14-55
+  newTag: 76b9fc9-erb-prod-2026-10-22--10-36

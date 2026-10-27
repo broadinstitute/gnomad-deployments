@@ -1,12 +1,14 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: exome-results-browsers-managed-cert-v2
+  name: exome-results-browsers-managed-cert-v3
 spec:
   domains:
+    - agb.broadinstitute.org
     - asc.broadinstitute.org
     - bipex.broadinstitute.org
     - epi25.broadinstitute.org
-    - schema.broadinstitute.org
     - gp2.broadinstitute.org
     - ibdseq.broadinstitute.org
+    - parkinsons.broadinstitute.org
+    - schema.broadinstitute.org
